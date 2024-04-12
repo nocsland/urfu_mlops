@@ -38,14 +38,14 @@ cd ../src || { echo "Не удалось перейти в каталог src"; 
 
 echo "Запускаю пайплайн"
 
-# Запуск создания данных
+echo "Запуск создания данных"
 python data_creation.py || { echo "Ошибка при выполнении data_creation.py"; exit 1; }
 
-# Запуск предобработки данных
+echo "Запуск предобработки данных"
 python model_preprocessing.py || { echo "Ошибка при выполнении model_preprocessing.py"; exit 1; }
 
-# Запуск подготовки и обучения модели
+echo "Запуск подготовки и обучения модели"
 python model_preparation.py || { echo "Ошибка при выполнении model_preparation.py"; exit 1; }
 
-# Запуск тестирования модели
+echo "Запуск тестирования модели"
 python model_testing.py || { echo "Ошибка при выполнении model_testing.py"; exit 1; }
