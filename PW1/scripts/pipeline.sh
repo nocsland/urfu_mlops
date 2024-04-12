@@ -29,7 +29,7 @@ if [[ -z "${VIRTUAL_ENV}" ]]; then
    source ../../venv/bin/activate || { echo "Ошибка при активации виртуального окружения."; exit 1; }
 
    echo "Устанавливаю зависимости"
-   pip install -r ../requirements.bak || { echo "Ошибка при установке зависимостей."; exit 1; }
+   pip install -r ../requirements.txt || { echo "Ошибка при установке зависимостей."; exit 1; }
 else
    echo "Виртуальное окружение активировано"
 fi
