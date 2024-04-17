@@ -1,0 +1,17 @@
+# Используем базовый образ Python
+FROM python:3.9-slim
+
+# Переключаем на root
+USER root
+
+# Устанавливаем рабочую директорию
+WORKDIR /app
+
+# Копируем файлы приложения в контейнер
+COPY .. /app/
+
+# Устанавливаем зависимости
+RUN pip install -r requirements.txt
+
+# Запускаем приложение
+CMD ["uvicorn", "src.app:app", "--host", "0.0.0.0", "--port", "8000"]
