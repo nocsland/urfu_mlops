@@ -26,7 +26,7 @@ X_train, X_test, y_train, y_test = train_test_split(iris.data, iris.target, test
 # Записываем датасет в CSV
 iris_df = pd.DataFrame(iris.data, columns=iris.feature_names)
 iris_df['target'] = iris.target
-iris_df.to_csv('data/dataset/iris_dataset.csv', index=False)
+iris_df.to_csv('data/datasets/iris_dataset.csv', index=False)
 
 # Выполняем пред обработку данных
 scaler = StandardScaler()
