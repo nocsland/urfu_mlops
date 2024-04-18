@@ -1,0 +1,4 @@
+[core]
+    remote = irises
+['remote "irises"']
+    url = gdrive://1c6rlL-jCJ5irsnflIKsVeX_gXaJ6rpDb
