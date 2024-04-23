@@ -1,9 +1,6 @@
 # Используем базовый образ Python
 FROM python:3.9-slim
 
-# Переключаем на root
-USER root
-
 # Устанавливаем рабочую директорию
 WORKDIR /app
 
