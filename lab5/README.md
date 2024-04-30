@@ -14,9 +14,9 @@
 
 - Для запуска тестов в виде ноутбука необходимо открыть файл test_nb_datasets.ipynb и последовательно запустить обе
   ячейки
-- набрать команду в cli `pytest --nbmake test_nb_datasets.ipynb`
+- или набрать команду в cli `pytest --nbmake test_nb_datasets.ipynb`
 
 ### Запуск тестов в виде .py файла
 
 - запустить файл `test_def_datasets.py`
-- набрать команду в cli `pytest`
+- или набрать команду в cli `pytest`
