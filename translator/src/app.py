@@ -1,3 +1,5 @@
+from typing import Dict
+
 import uvicorn
 from fastapi import FastAPI
 from pydantic import BaseModel
@@ -21,33 +23,36 @@ class TranslationRequest(BaseModel):
     text: str
 
 
-# Функция для перевода текста с русского на английский
-def translate_ru_to_en(text, max_length=100):
-    encoded_text = tokenizer_ru_to_en(text, return_tensors="pt", padding=True, truncation=True)
-    translated_text = model_ru_to_en.generate(**encoded_text, max_length=max_length)
-    translated_text = tokenizer_ru_to_en.decode(translated_text[0], skip_special_tokens=True)
-    return translated_text
+class Translator:
 
+    # Функция для перевода текста с русского на английский
+    @staticmethod
+    def translate_ru_to_en(text: str, max_length: int=100) -> str:
+        encoded_text = tokenizer_ru_to_en(text, return_tensors="pt", padding=True, truncation=True)
+        translated_text = model_ru_to_en.generate(**encoded_text, max_length=max_length)
+        translated_text = tokenizer_ru_to_en.decode(translated_text[0], skip_special_tokens=True)
+        return translated_text
 
-# Функция для перевода текста с английского на русский
-def translate_en_to_ru(text, max_length=100):
-    encoded_text = tokenizer_en_to_ru(text, return_tensors="pt", padding=True, truncation=True)
-    translated_text = model_en_to_ru.generate(**encoded_text, max_length=max_length)
-    translated_text = tokenizer_en_to_ru.decode(translated_text[0], skip_special_tokens=True)
-    return translated_text
+    # Функция для перевода текста с английского на русский
+    @staticmethod
+    def translate_en_to_ru(text: str, max_length: int=100) -> str:
+        encoded_text = tokenizer_en_to_ru(text, return_tensors="pt", padding=True, truncation=True)
+        translated_text = model_en_to_ru.generate(**encoded_text, max_length=max_length)
+        translated_text = tokenizer_en_to_ru.decode(translated_text[0], skip_special_tokens=True)
+        return translated_text
 
 
 # Эндпоинт для перевода с русского на английский
 @app.post("/translate/ru-to-en/")
-async def translate_ru_to_en_api(request: TranslationRequest):
-    translated_text = translate_ru_to_en(request.text)
+def translate_ru_to_en_api(request: TranslationRequest) -> Dict:
+    translated_text = Translator.translate_ru_to_en(request.text)
     return {"translated_text": translated_text}
 
 
 # Эндпоинт для перевода с английского на русский
 @app.post("/translate/en-to-ru/")
-async def translate_en_to_ru_api(request: TranslationRequest):
-    translated_text = translate_en_to_ru(request.text)
+def translate_en_to_ru_api(request: TranslationRequest) -> Dict:
+    translated_text = Translator.translate_en_to_ru(request.text)
     return {"translated_text": translated_text}
 
 
