@@ -1,4 +1,10 @@
-numpy
-sklearn
-nbmake
-pytest
+fastapi
+uvicorn
+pydantic
+requests
+transformers
+sacremoses
+dvc
+dvc-gdrive
+sentencepiece
+transformers[torch]
