@@ -24,7 +24,7 @@ pipeline {
         stage('Checkout') {
         // 'Checking out the repository'
             steps {
-                git branch: ${BRANCH_NAME}, url: 'https://github.com/nocsland/urfu_mlops.git'
+                git branch: "${BRANCH_NAME}", url: 'https://github.com/nocsland/urfu_mlops.git'
             }
         }
 
