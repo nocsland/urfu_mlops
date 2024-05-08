@@ -30,15 +30,16 @@ pipeline {
         stage('Preparation') {
         // 'Preparing for the build'
             steps {
-                cleanWs()
                 checkout scm
+                cleanWs()
+
             }
         }
 
         stage('Checkout') {
         // 'Checking out the repository'
             steps {
-                git branch: 'develop', url: 'https://github.com/nocsland/urfu_mlops.git'
+                git branch: 'develop', url: 'https://github.com/nocsland/urfu_mlops.git', tool: 'git'
             }
         }
 
