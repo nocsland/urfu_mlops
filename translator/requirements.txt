@@ -8,3 +8,5 @@ dvc
 dvc-gdrive
 sentencepiece
 transformers[torch]
+httpx
+pytest
