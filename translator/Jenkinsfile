@@ -68,6 +68,8 @@ pipeline {
             steps {
                 script {
                     dir('translator/tests') {
+                        // Установка Python
+                        sh 'apt update && apt install -y python3'
                         // 'Running tests'
                         sh 'python -m pytest'
                     }
