@@ -39,6 +39,7 @@ pipeline {
         stage('Checkout') {
         // 'Checking out the repository'
             steps {
+                checkout scm
                 git 'https://github.com/nocsland/urfu_mlops.git'
             }
         }
