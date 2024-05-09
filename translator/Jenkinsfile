@@ -35,11 +35,22 @@ pipeline {
 
             }
         }
+        stage('Get branch name') {
+            steps {
+                echo "Имя ветки: ${BRANCH_NAME}"
+            }
+        }
 
         stage('Checkout') {
         // 'Checking out the repository'
             steps {
                 git 'https://github.com/nocsland/urfu_mlops.git'
+            }
+        }
+
+          stage('Get branch name 2') {
+            steps {
+                echo "Имя ветки: ${BRANCH_NAME}"
             }
         }
 
