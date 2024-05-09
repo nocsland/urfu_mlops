@@ -43,12 +43,6 @@ pipeline {
             }
         }
 
-          stage('Get branch name') {
-            steps {
-                echo "Имя ветки: ${BRANCH_NAME}"
-            }
-        }
-
         stage('Build image') {
         // 'Building the Docker image'
             steps {
