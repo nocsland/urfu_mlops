@@ -63,5 +63,16 @@ pipeline {
                 }
             }
         }
+
+        stage('Run tests') {
+            steps {
+                script {
+                    dir('translator/tests') {
+                        // 'Running tests'
+                        sh 'python -m pytest'
+                    }
+                }
+            }
+        }
     }
 }
