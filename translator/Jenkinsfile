@@ -5,29 +5,20 @@ pipeline {
         skipDefaultCheckout(true)
     }
 
-    environment {
-        JENKINS_HOME = "$JENKINS_HOME"
-        BUILD = "${JENKINS_HOME}/workspace/mlops"
-    }
-
     stages {
-        stage('Stop and remove container') {
+        stage('Stop and remove old container and image') {
             steps {
                 script {
                     sh 'docker stop translator-app && docker rm translator-app || true'
-                }
-            }
-        }
-        stage('Remove image') {
-            steps {
-                script {
                     sh 'docker rmi translator-img || true'
                 }
             }
         }
+
         stage('Preparation') {
             steps {
                 cleanWs()
+                checkout scm
             }
         }
 
