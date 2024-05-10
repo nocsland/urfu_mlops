@@ -10,4 +10,5 @@ sentencepiece
 transformers[torch]
 httpx
 pytest
+pandas
 allure-pytest
