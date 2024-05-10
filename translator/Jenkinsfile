@@ -64,14 +64,26 @@ pipeline {
             }
         }
 
+        stage('Install dependencies') {
+            steps {
+                script {
+                    dir('translator/') {
+                        sh 'sudo apt update && sudo apt install -y python3-pip python3-venv'
+                        sh 'python3 -m venv venv'
+                        sh 'chmod +x venv/bin/activate'
+                        sh './venv/bin/activate'
+                        sh 'pip3 install -r requirements.txt'
+                    }
+                }
+            }
+        }
+
         stage('Run tests') {
             steps {
                 script {
-                    dir('translator/tests') {
-                        // Установка Python
-                        sh 'apt update && apt install -y python3'
+                    dir('translator/') {
                         // 'Running tests'
-                        sh 'python -m pytest'
+                        sh 'python3 -m pytest'
                     }
                 }
             }
