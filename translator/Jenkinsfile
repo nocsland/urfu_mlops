@@ -1,13 +1,11 @@
 pipeline {
     agent any
+
     options {
-    // 'Preparing for the build'
-    // This is required if you want to clean before build
         skipDefaultCheckout(true)
     }
 
     environment {
-     // Environment variables for the pipeline
         JENKINS_HOME = "$JENKINS_HOME"
         BUILD = "${JENKINS_HOME}/workspace/mlops"
     }
@@ -28,24 +26,18 @@ pipeline {
             }
         }
         stage('Preparation') {
-        // 'Preparing for the build'
             steps {
                 cleanWs()
-                checkout scm
-
-
             }
         }
 
         stage('Checkout') {
-        // 'Checking out the repository'
             steps {
                 git branch: 'develop', url: 'https://github.com/nocsland/urfu_mlops.git'
             }
         }
 
         stage('Build image') {
-        // 'Building the Docker image'
             steps {
                 script {
                     dir('translator/') {
@@ -56,7 +48,6 @@ pipeline {
         }
 
         stage('Run container') {
-        // 'Running the Docker container'
             steps {
                 script {
                     sh 'docker run -d -p 8000:8000 --name translator-app translator-img'
@@ -64,14 +55,51 @@ pipeline {
             }
         }
 
+        stage('Install dependencies') {
+            steps {
+                script {
+                    dir('translator/') {
+                        sh 'sudo apt update && sudo apt install -y python3-pip python3-venv'
+                        sh 'python3 -m venv venv'
+                        sh 'chmod +x venv/bin/activate'
+                        sh './venv/bin/activate'
+                        sh 'pip3 install -r requirements.txt'
+                    }
+                }
+            }
+        }
+
         stage('Run tests') {
             steps {
                 script {
-                    dir('translator/tests') {
-                        // Установка Python
-                        sh 'apt update && apt install -y python3'
-                        // 'Running tests'
-                        sh 'python -m pytest'
+                    dir('translator/') {
+                        sh 'python3 -m pytest --alluredir allure-results'
+                    }
+                }
+            }
+        }
+
+        stage('Collect Allure results') {
+            steps {
+                script {
+                    dir('translator/') {
+                        allure([
+                            includeProperties: false,
+                            jdk: '',
+                            properties: [],
+                            reportBuildPolicy: 'ALWAYS',
+                            results: [[path: 'allure-results']]
+                        ])
+                    }
+                }
+            }
+        }
+
+        stage('Generate Allure report') {
+            steps {
+                script {
+                    dir('translator/') {
+                        sh 'allure generate allure-results --clean -o allure-report'
                     }
                 }
             }
