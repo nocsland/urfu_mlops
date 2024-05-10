@@ -33,7 +33,7 @@ pipeline {
 
         stage('Checkout') {
             steps {
-                git branch: 'feature/add-allure-pytest', url: 'https://github.com/nocsland/urfu_mlops.git'
+                git branch: 'develop', url: 'https://github.com/nocsland/urfu_mlops.git'
             }
         }
 
