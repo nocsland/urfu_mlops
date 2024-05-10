@@ -88,5 +88,22 @@ pipeline {
                 }
             }
         }
+
+        stage('Collect Allure results') {
+            steps {
+                script {
+                    dir('translator/') {
+                        allure([
+                            includeProperties: false,
+                            jdk: '',
+                            properties: [],
+                            reportBuildPolicy: 'ALWAYS',
+                            results: '/allure-results'
+                        ])
+                        }
+                    }
+                }
+            }
+        }
     }
 }
