@@ -1,13 +1,11 @@
 pipeline {
     agent any
+
     options {
-    // 'Preparing for the build'
-    // This is required if you want to clean before build
         skipDefaultCheckout(true)
     }
 
     environment {
-     // Environment variables for the pipeline
         JENKINS_HOME = "$JENKINS_HOME"
         BUILD = "${JENKINS_HOME}/workspace/mlops"
     }
@@ -28,24 +26,18 @@ pipeline {
             }
         }
         stage('Preparation') {
-        // 'Preparing for the build'
             steps {
                 cleanWs()
-                checkout scm
-
-
             }
         }
 
         stage('Checkout') {
-        // 'Checking out the repository'
             steps {
                 git branch: 'feature/add-allure-pytest', url: 'https://github.com/nocsland/urfu_mlops.git'
             }
         }
 
         stage('Build image') {
-        // 'Building the Docker image'
             steps {
                 script {
                     dir('translator/') {
@@ -56,7 +48,6 @@ pipeline {
         }
 
         stage('Run container') {
-        // 'Running the Docker container'
             steps {
                 script {
                     sh 'docker run -d -p 8000:8000 --name translator-app translator-img'
@@ -82,7 +73,6 @@ pipeline {
             steps {
                 script {
                     dir('translator/') {
-                        // 'Running tests'
                         sh 'python3 -m pytest --alluredir allure-results'
                     }
                 }
@@ -98,7 +88,7 @@ pipeline {
                             jdk: '',
                             properties: [],
                             reportBuildPolicy: 'ALWAYS',
-                            results: [[path: '/allure-results']]
+                            results: [[path: 'allure-results']]
                         ])
                     }
                 }
