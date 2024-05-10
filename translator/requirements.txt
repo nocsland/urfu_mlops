@@ -10,3 +10,4 @@ sentencepiece
 transformers[torch]
 httpx
 pytest
+allure-pytest
