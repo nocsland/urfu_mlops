@@ -2,9 +2,8 @@ from ast import literal_eval
 import pandas as pd
 import re
 
-test_data = pd.read_csv(
-    filepath_or_buffer="translator/data/datasets/dataset.csv"
-)
+DATASET_PATH = "../data/datasets/dataset.csv"
+test_data = pd.read_csv(filepath_or_buffer=DATASET_PATH)
 
 
 # Проверка наличия всех необходимых ключей
