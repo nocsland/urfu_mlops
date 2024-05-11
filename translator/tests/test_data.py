@@ -2,7 +2,7 @@ from ast import literal_eval
 import pandas as pd
 import re
 
-DATASET_PATH = "../data/datasets/dataset.csv"
+DATASET_PATH = "data/datasets/dataset.csv"
 test_data = pd.read_csv(filepath_or_buffer=DATASET_PATH)
 
 
