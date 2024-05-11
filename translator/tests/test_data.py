@@ -30,8 +30,9 @@ class TestDataQualityChecks:
             el_dict = dict(literal_eval(el))
             assert isinstance(el_dict["id"], str), "id should be a string"
             assert isinstance(el_dict["translation"], dict), "translation should be a dictionary"
-            assert all(isinstance(value, str) for value in
-                       el_dict["translation"].values()), "All translations should be strings"
+            assert all(
+                isinstance(value, str) for value in el_dict["translation"].values()
+            ), "All translations should be strings"
 
     @allure.title("Check ID Format")
     @allure.description("Ensure the ID format is correct")
