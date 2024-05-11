@@ -28,6 +28,16 @@ pipeline {
             }
         }
 
+        stage('Download dataset') {
+            steps {
+                script {
+                    dir('translator/') {
+                        sh 'dvc pull -r "translator" '
+                    }
+                }
+            }
+        }
+
         stage('Build image') {
             steps {
                 script {
