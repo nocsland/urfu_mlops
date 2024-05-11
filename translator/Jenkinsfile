@@ -32,7 +32,7 @@ pipeline {
             steps {
                 script {
                     dir('translator/') {
-                        sh 'dvc pull -r "translator" '
+                        sh 'sudo dvc pull -r "translator"'
                     }
                 }
             }
