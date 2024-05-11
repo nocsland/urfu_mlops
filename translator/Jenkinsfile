@@ -27,17 +27,17 @@ pipeline {
                 git branch: 'develop', url: 'https://github.com/nocsland/urfu_mlops.git'
             }
         }
-
+/*
         stage('Download dataset') {
             steps {
                 script {
                     dir('translator/') {
-                        sh 'sudo dvc pull -r "translator"'
+                        sh 'dvc pull -r "translator"'
                     }
                 }
             }
         }
-
+*/
         stage('Build image') {
             steps {
                 script {
@@ -60,7 +60,7 @@ pipeline {
             steps {
                 script {
                     dir('translator/') {
-                        sh 'sudo apt update && sudo apt install -y python3-pip python3-venv'
+                        sh 'sudo apt-get update && sudo apt-get install -y python3-pip python3-venv'
                         sh 'python3 -m venv venv'
                         sh 'chmod +x venv/bin/activate'
                         sh './venv/bin/activate'
