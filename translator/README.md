@@ -62,4 +62,4 @@ json { "translated_text": "Hello, world!" }
 ```
 
 ## Лицензия
-
+MIT License
