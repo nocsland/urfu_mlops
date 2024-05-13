@@ -22,15 +22,10 @@ pipeline {
             }
         }
 
-        stage('Check Environment Variables') {
-            steps {
-                sh 'printenv'
-            }
-        }
 
         stage('Checkout') {
             steps {
-                git url: 'https://github.com/nocsland/urfu_mlops.git'
+                git branch: '${params.BRANCH_NAME}', url: 'https://github.com/nocsland/urfu_mlops.git'
             }
         }
 
