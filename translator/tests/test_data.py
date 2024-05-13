@@ -22,9 +22,9 @@ class TestDataQualityChecks:
     4. Verify that both 'en' and 'ru' keys exist within the 'translation' dictionary.
     """)
     def test_keys_existence(self):
-        train = test_data["train"]
-        for el in train:
-            with allure.step("Check keys existence for an element"):
+        with allure.step("Iterating through each element in the 'train' column"):
+            train = test_data["train"]
+            for el in train:
                 el_dict = dict(literal_eval(el))
                 assert "id" in el_dict, "Key 'id' is missing"
                 assert "translation" in el_dict, "Key 'translation' is missing"
@@ -42,9 +42,9 @@ class TestDataQualityChecks:
     4. Verify that all values within 'translation' are strings.
     """)
     def test_data_types(self):
-        train = test_data["train"]
-        for el in train:
-            with allure.step("Check data types for an element"):
+        with allure.step("Iterating through each element in the 'train' column"):
+            train = test_data["train"]
+            for el in train:
                 el_dict = dict(literal_eval(el))
                 assert isinstance(el_dict["id"], str), "id should be a string"
                 assert isinstance(el_dict["translation"], dict), "translation should be a dictionary"
@@ -62,9 +62,9 @@ class TestDataQualityChecks:
     3. Match the 'id' value against the expected format using a regular expression.
     """)
     def test_id_format(self):
-        train = test_data["train"]
-        for el in train:
-            with allure.step("Check ID format for an element"):
+        with allure.step("Iterating through each element in the 'train' column"):
+            train = test_data["train"]
+            for el in train:
                 assert re.match(r'^\d+$', dict(literal_eval(el))["id"]), "ID format is incorrect"
 
     @allure.title("Check Translation Content")
@@ -77,9 +77,9 @@ class TestDataQualityChecks:
     3. Check each translation value for whitespace or emptiness.
     """)
     def test_translation_content(self):
-        train = test_data["train"]
-        for el in train:
-            with allure.step("Check translation content for an element"):
+        with allure.step("Iterating through each element in the 'train' column"):
+            train = test_data["train"]
+            for el in train:
                 for lang, text in dict(literal_eval(el))["translation"].items():
                     assert text.strip(), f"Translation for {lang} is empty or whitespace"
 
@@ -92,6 +92,6 @@ class TestDataQualityChecks:
     2. Check if the number of unique IDs is equal to the total number of IDs.
     """)
     def test_unique_ids(self):
-        with allure.step("Check uniqueness of IDs"):
+        with allure.step("Extracting all IDs from the 'train' column"):
             ids = [dict(literal_eval(item))['id'] for item in test_data["train"]]
             assert len(ids) == len(set(ids)), "IDs are not unique"
