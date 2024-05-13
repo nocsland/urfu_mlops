@@ -22,9 +22,15 @@ pipeline {
             }
         }
 
+        stage('Test') {
+            steps {
+                echo "Branch name: ${env.BRANCH_NAME}"
+            }
+        }
+
         stage('Checkout') {
             steps {
-                git branch: BRANCH_NAME, url: 'https://github.com/nocsland/urfu_mlops.git'
+                git branch: '${env.BRANCH_NAME}', url: 'https://github.com/nocsland/urfu_mlops.git'
             }
         }
 
