@@ -22,9 +22,13 @@ pipeline {
             }
         }
 
-        stage('Test') {
+        stage('Check Environment Variables') {
             steps {
-                echo "Branch name: ${BRANCH_NAME}"
+                script {
+                    env.each { k, v ->
+                        echo "${k} = ${v}"
+                    }
+                }
             }
         }
 
