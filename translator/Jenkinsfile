@@ -24,11 +24,7 @@ pipeline {
 
         stage('Check Environment Variables') {
             steps {
-                script {
-                    env.each { k, v ->
-                        echo "${k} = ${v}"
-                    }
-                }
+                echo env
             }
         }
 
