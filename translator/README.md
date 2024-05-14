@@ -26,7 +26,6 @@
 - pip
 - Jenkins
 - Allure
-- dvc
 
 ## Установка и запуск
 
