@@ -74,6 +74,7 @@ json { "text": "Привет, мир!" }
 Ответ:  
 ```
 json { "translated_text": "Hello, world!" }
+```
 
 ## Наша команда
 
