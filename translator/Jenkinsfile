@@ -52,7 +52,7 @@ pipeline {
         stage('Run container') {
             steps {
                 script {
-                    sh 'docker run -d -p 8000:8000 --restart always --name translator-app translator-img'
+                    sh 'docker run -d -p 8000:8000 --restart unless-stopped --name translator-app translator-img'
                 }
             }
         }
