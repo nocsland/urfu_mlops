@@ -71,7 +71,7 @@
 json { "text": "Привет, мир!" }
 ```
 
-Ответ:  
+Ответ:
 ```
 json { "translated_text": "Hello, world!" }
 ```
